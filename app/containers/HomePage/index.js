@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import H1 from 'components/H1';
+import H1 from 'components/shared/H1';
 import Description from './Description';
 import messages from './messages';
 

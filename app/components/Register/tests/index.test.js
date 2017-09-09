@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
 
-import Form from 'components/Form';
+import Form from 'components/shared/Form';
 import Register from '../index';
 import messages from '../messages';
 
