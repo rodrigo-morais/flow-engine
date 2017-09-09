@@ -2,13 +2,13 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
 
-import NotFoundPage from '../index';
+import Register from '../index';
 import messages from '../messages';
 
-describe('<NotFoundPage />', () => {
-  it('should render the page message', () => {
+describe('<Register />', () => {
+  it('should render the page title', () => {
     const renderedComponent = shallow(
-      <NotFoundPage />
+      <Register />
     );
     expect(renderedComponent.contains(
       <FormattedMessage {...messages.header} />
