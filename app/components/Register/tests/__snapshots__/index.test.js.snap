@@ -1,0 +1,89 @@
+exports[`<Register /> renders according to design 1`] = `
+<div>
+  <h1
+    className="ccoFJN">
+    <span>
+      Register
+    </span>
+  </h1>
+  <form
+    className="eQdiUA">
+    <fieldset
+      className="gDzNqM">
+      <label
+        className="kEniqV"
+        htmlFor="title"
+        name="title">
+        <span>
+          Rule title
+        </span>
+      </label>
+      <input
+        className="LxCJS"
+        name="title"
+        type="text" />
+    </fieldset>
+    <fieldset
+      className="gDzNqM">
+      <label
+        className="kEniqV"
+        htmlFor="id"
+        name="id">
+        <span>
+          Rule id
+        </span>
+      </label>
+      <input
+        className="LxCJS"
+        name="id"
+        type="text" />
+    </fieldset>
+    <fieldset
+      className="gDzNqM">
+      <label
+        className="kEniqV"
+        htmlFor="body"
+        name="body">
+        <span>
+          Rule body
+        </span>
+      </label>
+      <textarea
+        className="eMewAs"
+        cols="70"
+        name="body"
+        rows="10" />
+    </fieldset>
+    <fieldset
+      className="gDzNqM">
+      <label
+        className="kEniqV"
+        htmlFor="passed"
+        name="passed">
+        <span>
+          If rule passed
+        </span>
+      </label>
+      <input
+        className="LxCJS"
+        name="passed"
+        type="text" />
+    </fieldset>
+    <fieldset
+      className="gDzNqM">
+      <label
+        className="kEniqV"
+        htmlFor="failed"
+        name="failed">
+        <span>
+          If rule failed
+        </span>
+      </label>
+      <input
+        className="LxCJS"
+        name="failed"
+        type="text" />
+    </fieldset>
+  </form>
+</div>
+`;
