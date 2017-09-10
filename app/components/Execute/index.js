@@ -8,7 +8,7 @@ import Form from 'components/shared/Form';
 import FormLine from 'components/shared/FormLine';
 import messages from './messages';
 
-const Execute = ({ rules, next, onCleanPreviousExecution, onAddExecution }) => {
+const Execute = ({ rules, next, onCleanPreviousExecution, onAddExecution, finished }) => {
   const lines = [
     {
       name: 'object',
@@ -36,14 +36,17 @@ const Execute = ({ rules, next, onCleanPreviousExecution, onAddExecution }) => {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    const obj = event.target.querySelect('textarea').value;
-    const rule = next ? rules.find((r) => r.id === next) : rules.first();
-    const result = executeBody(rule.body, obj);
+    const obj = event.target.querySelector('textarea').value;
+    const rule = next ? rules.find((r) => r.id === next) : rules.shift();
 
-    onAddExecution(rule, result ? rule.passed : rule.failed);
+    if (rule) {
+      const result = executeBody(rule.body, obj);
+
+      onAddExecution(rule, result ? rule.passed : rule.failed);
+    }
   };
 
-  if (!next) {
+  if (!next || finished) {
     onCleanPreviousExecution();
   }
 
@@ -75,6 +78,7 @@ Execute.propTypes = {
   next: PropTypes.string,
   onCleanPreviousExecution: PropTypes.func.isRequired,
   onAddExecution: PropTypes.func.isRequired,
+  finished: PropTypes.bool.isRequired,
 };
 
 export default Execute;
