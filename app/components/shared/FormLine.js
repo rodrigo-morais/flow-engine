@@ -24,9 +24,9 @@ const FormLine = ({
 );
 
 FormLine.propTypes = {
-  name: PropTypes.string,
-  labelText: PropTypes.node,
-  inputType: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  labelText: PropTypes.node.isRequired,
+  inputType: PropTypes.string.isRequired,
 };
 
 export default FormLine;

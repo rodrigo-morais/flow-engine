@@ -7,7 +7,8 @@ exports[`<Register /> renders according to design 1`] = `
     </span>
   </h1>
   <form
-    className="eQdiUA">
+    className="eQdiUA"
+    onSubmit={[Function]}>
     <fieldset
       className="gDzNqM">
       <label
@@ -84,6 +85,10 @@ exports[`<Register /> renders according to design 1`] = `
         name="failed"
         type="text" />
     </fieldset>
+    <button
+      type="submit">
+      Register
+    </button>
   </form>
 </div>
 `;
