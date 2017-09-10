@@ -26,5 +26,9 @@ export default defineMessages({
       id: 'app.components.RegisterPage.form.failed',
       defaultMessage: 'If rule failed',
     },
+    submit: {
+      id: 'app.components.RegisterPage.form.submit',
+      defaultMessage: 'Register',
+    },
   },
 });

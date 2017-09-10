@@ -10,5 +10,9 @@ export default defineMessages({
       id: 'app.components.ExecutePage.form.object',
       defaultMessage: 'Object',
     },
+    submit: {
+      id: 'app.components.ExecutePage.form.submit',
+      defaultMessage: 'Execute flow',
+    },
   },
 });

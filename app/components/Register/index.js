@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import H1 from 'components/shared/H1';
+import Button from 'components/shared/Button';
 import Form from 'components/shared/Form';
 import FormLine from 'components/shared/FormLine';
 import messages from './messages';
@@ -43,7 +44,7 @@ const Register = ({ onRegisterRule }) => {
       inputType={line.inputType}
     />);
 
-  // Validation should be a library which test other things as circular calls
+  // Validation should be a library which test other things as circular calls, if is number or not to index and next rule and if the body is a funtion
   const validateRule = (form) =>
     form.title.length > 0 && form.id.length > 0 && form.body.length > 0;
 
@@ -73,7 +74,9 @@ const Register = ({ onRegisterRule }) => {
       </H1>
       <Form onSubmit={onSubmit}>
         {formLines()}
-        <button type="submit">Register</button>
+        <Button type="submit">
+          <FormattedMessage {...messages.form.submit} />
+        </Button>
       </Form>
     </div>
   );

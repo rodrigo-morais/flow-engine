@@ -86,8 +86,11 @@ exports[`<Register /> renders according to design 1`] = `
         type="text" />
     </fieldset>
     <button
+      className="egBxff"
       type="submit">
-      Register
+      <span>
+        Register
+      </span>
     </button>
   </form>
 </div>

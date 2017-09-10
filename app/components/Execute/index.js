@@ -1,12 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import H1 from 'components/shared/H1';
+import Button from 'components/shared/Button';
 import Form from 'components/shared/Form';
 import FormLine from 'components/shared/FormLine';
 import messages from './messages';
 
-const Execute = () => {
+const Execute = ({ rules, next, onCleanPreviousExecution, onAddExecution }) => {
   const lines = [
     {
       name: 'object',
@@ -22,9 +24,28 @@ const Execute = () => {
       inputType={line.inputType}
     />);
 
+  const executeBody = (body, obj) => {
+    try {
+      const result = body.call(undefined, obj);
+      return !!result;
+    } catch (e) {
+      return false;
+    }
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
+
+    const obj = event.target.querySelect('textarea').value;
+    const rule = next ? rules.find((r) => r.id === next) : rules.first();
+    const result = executeBody(rule.body, obj);
+
+    onAddExecution(rule, result ? rule.passed : rule.failed);
   };
+
+  if (!next) {
+    onCleanPreviousExecution();
+  }
 
   return (
     <div>
@@ -33,13 +54,27 @@ const Execute = () => {
       </H1>
       <Form onSubmit={onSubmit}>
         {formLines()}
-        <button type="submit">Execute flow</button>
+        <Button type="submit">
+          <FormattedMessage {...messages.form.submit} />
+        </Button>
       </Form>
     </div>
   );
 };
 
 Execute.propTypes = {
+  rules: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      passed: PropTypes.string,
+      failed: PropTypes.string,
+    })
+  ).isRequired,
+  next: PropTypes.string,
+  onCleanPreviousExecution: PropTypes.func.isRequired,
+  onAddExecution: PropTypes.func.isRequired,
 };
 
 export default Execute;
