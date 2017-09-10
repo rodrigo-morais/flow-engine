@@ -7,7 +7,7 @@ import Form from 'components/shared/Form';
 import FormLine from 'components/shared/FormLine';
 import messages from './messages';
 
-const Register = ({ registerRule }) => {
+const Register = ({ onRegisterRule }) => {
   const lines = [
     {
       name: 'title',
@@ -43,6 +43,7 @@ const Register = ({ registerRule }) => {
       inputType={line.inputType}
     />);
 
+  // Validation should be a library which test other things as circular calls
   const validateRule = (form) =>
     form.title.length > 0 && form.id.length > 0 && form.body.length > 0;
 
@@ -50,12 +51,16 @@ const Register = ({ registerRule }) => {
     event.preventDefault();
 
     const form = event.target;
-    const rule = [].slice.call(form.querySelectorAll('input'))
+    const inputs = [
+      ...[].slice.call(form.querySelectorAll('input')),
+      ...[].slice.call(form.querySelectorAll('textarea')),
+    ];
+    const rule = inputs
       .map((field) => ({ [field.name]: field.value }))
       .reduce((previous, current) => ({ ...previous, ...current }), {});
 
     if (validateRule(rule)) {
-      registerRule(rule);
+      onRegisterRule(rule);
     }
 
     form.reset();
@@ -75,7 +80,7 @@ const Register = ({ registerRule }) => {
 };
 
 Register.propTypes = {
-  registerRule: PropTypes.func.isRequired,
+  onRegisterRule: PropTypes.func.isRequired,
 };
 
 export default Register;

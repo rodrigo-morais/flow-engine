@@ -14,7 +14,7 @@ describe('<Register />', () => {
     const component = renderer.create(
       <IntlProvider locale="en">
         <Register
-          registerRule={registerRuleMock}
+          onRegisterRule={registerRuleMock}
         />
       </IntlProvider>
     );
@@ -25,7 +25,7 @@ describe('<Register />', () => {
   it('should render the page title', () => {
     const renderedComponent = shallow(
       <Register
-        registerRule={registerRuleMock}
+        onRegisterRule={registerRuleMock}
       />
     );
     expect(renderedComponent.contains(
@@ -36,7 +36,7 @@ describe('<Register />', () => {
   it('should contain 5 FormLines', () => {
     const renderedComponent = shallow(
       <Register
-        registerRule={registerRuleMock}
+        onRegisterRule={registerRuleMock}
       />
     );
     const formLines = renderedComponent.find('FormLine');
@@ -48,7 +48,7 @@ describe('<Register />', () => {
     const renderedComponent = mount(
       <IntlProvider locale="en">
         <Register
-          registerRule={registerRuleMock}
+          onRegisterRule={registerRuleMock}
         />
       </IntlProvider>
     );
@@ -76,7 +76,7 @@ describe('<Register />', () => {
     const renderedComponent = mount(
       <IntlProvider locale="en">
         <Register
-          registerRule={registerRuleMock}
+          onRegisterRule={registerRuleMock}
         />
       </IntlProvider>
     );

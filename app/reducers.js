@@ -3,6 +3,7 @@ import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import registerPageReducer from 'containers/RegisterPage/reducer';
 
 const routeInitialState = fromJS({
   locationBeforeTransitions: null,
@@ -23,6 +24,7 @@ export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
+    rules: registerPageReducer,
     ...asyncReducers,
   });
 }
