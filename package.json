@@ -190,7 +190,9 @@
       "!app/routes.js",
       "!app/global-styles.js",
       "!app/containers/RegisterPage/*.js",
-      "!app/components/shared/*.js"
+      "!app/containers/ExecutePage/*.js",
+      "!app/components/shared/*.js",
+      "!app/components/Execute/*.js"
     ],
     "coverageThreshold": {
       "global": {

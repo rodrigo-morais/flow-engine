@@ -1,14 +1,11 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 
-import messages from './messages';
+import Execute from 'components/Execute';
 
-export default class Execute extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
-    );
-  }
-}
+const mapStateToProps = () => ({
+});
+
+const mapDispatchToProps = () => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Execute);
