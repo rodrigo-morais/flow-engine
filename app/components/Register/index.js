@@ -48,6 +48,11 @@ const Register = ({ onRegisterRule }) => {
   const validateRule = (form) =>
     form.title.length > 0 && form.id.length > 0 && form.body.length > 0;
 
+  const clearForm = (form) => {
+    Array.from(form.querySelectorAll('input')).map(item => item.value = '')
+    Array.from(form.querySelectorAll('textarea')).map(item => item.value = '')
+  }
+
   const onSubmit = (event) => {
     event.preventDefault();
 
@@ -64,7 +69,7 @@ const Register = ({ onRegisterRule }) => {
       onRegisterRule(rule);
     }
 
-    form.reset();
+    clearForm(form);
   };
 
   return (
