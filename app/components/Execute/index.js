@@ -6,6 +6,9 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import H1 from 'components/shared/H1';
+import H2 from 'components/shared/H2';
+import Ul from 'components/shared/Ul';
+import Li from 'components/shared/Li';
 import Button from 'components/shared/Button';
 import Form from 'components/shared/Form';
 import FormLine from 'components/shared/FormLine';
@@ -60,6 +63,21 @@ const Execute = ({ rules, onAddExecution, flow }) => {
     onAddExecution(newFlow);
   };
 
+  const result = () => (
+    <div>
+      <hr />
+      <H2>
+        <FormattedMessage {...messages.result.title} />
+      </H2>
+      <Ul>
+        {
+          flow.map((item, index) => (<Li key={index}>{item}</Li>))
+        }
+      </Ul>
+    </div>
+  );
+
+
   return (
     <div>
       <H1>
@@ -71,11 +89,7 @@ const Execute = ({ rules, onAddExecution, flow }) => {
           <FormattedMessage {...messages.form.submit} />
         </Button>
       </Form>
-      <ul>
-        {
-          flow.map((item, index) => (<li key={index}>{item}</li>))
-        }
-      </ul>
+      {result()}
     </div>
   );
 };

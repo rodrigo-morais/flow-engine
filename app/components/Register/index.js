@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -49,9 +51,9 @@ const Register = ({ onRegisterRule }) => {
     form.title.length > 0 && form.id.length > 0 && form.body.length > 0;
 
   const clearForm = (form) => {
-    Array.from(form.querySelectorAll('input')).map(item => item.value = '')
-    Array.from(form.querySelectorAll('textarea')).map(item => item.value = '')
-  }
+    Array.from(form.querySelectorAll('input')).forEach((item) => { item.value = ''; });
+    Array.from(form.querySelectorAll('textarea')).forEach((item) => { item.value = ''; });
+  };
 
   const onSubmit = (event) => {
     event.preventDefault();

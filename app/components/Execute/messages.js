@@ -5,6 +5,12 @@ export default defineMessages({
     id: 'app.components.ExecutePage.header',
     defaultMessage: 'Execute',
   },
+  result: {
+    title: {
+      id: 'app.components.ExecutePage.result.title',
+      defaultMessage: 'Result',
+    },
+  },
   form: {
     object: {
       id: 'app.components.ExecutePage.form.object',
