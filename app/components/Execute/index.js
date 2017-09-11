@@ -1,3 +1,6 @@
+/* eslint no-eval: ["error", {"allowIndirect": true}] */
+/* eslint-env es6 */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -8,7 +11,7 @@ import Form from 'components/shared/Form';
 import FormLine from 'components/shared/FormLine';
 import messages from './messages';
 
-const Execute = ({ rules, next, onCleanPreviousExecution, onAddExecution, finished }) => {
+const Execute = ({ rules, onAddExecution, flow }) => {
   const lines = [
     {
       name: 'object',
@@ -26,7 +29,8 @@ const Execute = ({ rules, next, onCleanPreviousExecution, onAddExecution, finish
 
   const executeBody = (body, obj) => {
     try {
-      const result = body.call(undefined, obj);
+      const func = eval.call(null, `(${body})`);
+      const result = func.call(undefined, obj);
       return !!result;
     } catch (e) {
       return false;
@@ -36,19 +40,25 @@ const Execute = ({ rules, next, onCleanPreviousExecution, onAddExecution, finish
   const onSubmit = (event) => {
     event.preventDefault();
 
+    let newFlow = [];
     const obj = event.target.querySelector('textarea').value;
-    const rule = next ? rules.find((r) => r.id === next) : rules.shift();
+    let rule = rules[0];
 
-    if (rule) {
+    while (rule) {
       const result = executeBody(rule.body, obj);
+      const next = result ? rule.passed : rule.failed;
+      const ruleState = rule.passed === next ? 'passed' : 'failed';
+      const item = `Rule ${rule.id} ${ruleState}`;
 
-      onAddExecution(rule, result ? rule.passed : rule.failed);
+      rule = next.length > 0 ?
+        rules.find((r) => r.id === next) :
+        null;
+
+      newFlow = [...newFlow, item];
     }
-  };
 
-  if (!next || finished) {
-    onCleanPreviousExecution();
-  }
+    onAddExecution(newFlow);
+  };
 
   return (
     <div>
@@ -61,6 +71,11 @@ const Execute = ({ rules, next, onCleanPreviousExecution, onAddExecution, finish
           <FormattedMessage {...messages.form.submit} />
         </Button>
       </Form>
+      <ul>
+        {
+          flow.map((item, index) => (<li key={index}>{item}</li>))
+        }
+      </ul>
     </div>
   );
 };
@@ -75,10 +90,8 @@ Execute.propTypes = {
       failed: PropTypes.string,
     })
   ).isRequired,
-  next: PropTypes.string,
-  onCleanPreviousExecution: PropTypes.func.isRequired,
   onAddExecution: PropTypes.func.isRequired,
-  finished: PropTypes.bool.isRequired,
+  flow: PropTypes.array.isRequired,
 };
 
 export default Execute;

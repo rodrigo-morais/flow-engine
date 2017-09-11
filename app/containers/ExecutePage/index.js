@@ -8,31 +8,21 @@ export class ExecutePage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onCleanPreviousExecution = this.onCleanPreviousExecution.bind(this);
     this.onAddExecution = this.onAddExecution.bind(this);
 
-    this.state = { next: null, flow: [], finished: false };
+    this.state = { flow: [] };
   }
 
-  onCleanPreviousExecution() {
-    console.log('clean');
-  }
-
-  onAddExecution(rule, next) {
-    const ruleState = rule.passed === next ? 'passed' : 'failed';
-    const item = `Rule ${rule.id} ${ruleState}`;
-    this.setState({ flow: [...this.state.flow, item], next, finished: !next });
+  onAddExecution(flow) {
+    this.setState({ flow });
   }
 
   render() {
     return (
       <Execute
         rules={this.props.rules}
-        next={this.state.next}
-        onCleanPreviousExecution={this.onCleanPreviousExecution}
         onAddExecution={this.onAddExecution}
         flow={this.state.flow}
-        finished={this.state.finished}
       />
     );
   }
